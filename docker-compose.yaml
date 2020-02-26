@@ -1,5 +1,24 @@
 version: "2"
 services:
+  grafana:
+    ports:
+     - 3300:3000
+    image: grafana/grafana
+    container_name: grafana1
+    networks:
+      - Network_app
+
+  influxdb:
+    container_name: influxdb
+    hostname: influxdb
+    image: influxdb
+    ports:
+      - 8086:8086
+    volumes:
+      - /tmp/influxdb:/var/lib/influxdb
+    networks:
+      - Network_app
+
   microservice1:
     image: microservice1
     container_name: microservice1
@@ -11,7 +30,7 @@ services:
     mem_limit: 1024M
     mem_reservation: 512M
     ports:
-    - 6060:6060
+      - 6060:6060
     volumes:
       - /etc/hosts:/etc/hosts
       - /var/run/docker.sock:/var/run/docker.sock
@@ -33,24 +52,6 @@ services:
     volumes:
       - /etc/hosts:/etc/hosts
       - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - Network_app
-
-  grafana:
-    ports:
-     - 3300:3000
-    image: grafana/grafana
-    container_name: grafana1
-    networks:
-      - Network_app
-
-  prometheus:
-    container_name: influxdb
-    image: influxdb
-    ports:
-      - 8086:8086
-    volumes:
-      - /tmp/influxdb:/var/lib/influxdb
     networks:
       - Network_app
 
