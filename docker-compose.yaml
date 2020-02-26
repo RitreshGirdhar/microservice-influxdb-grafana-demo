@@ -1,46 +1,46 @@
 version: "2"
 services:
-#  microservice1:
-#    image: microservice1
-#    container_name: microservice1
-#    build:
-#      context: ./microservice1
-#      dockerfile: Dockerfile
-#    restart: on-failure
-#    tty: true
-#    mem_limit: 1024M
-#    mem_reservation: 512M
-#    ports:
-#    - 8080:8080
-#    volumes:
-#      - /etc/hosts:/etc/hosts
-#      - /var/run/docker.sock:/var/run/docker.sock
-#    networks:
-#      - Network_app
-#
-#  microservice2:
-#    container_name: microservice2
-#    build:
-#      context: ./microservice2
-#      dockerfile: Dockerfile
-#    image: microservice2
-#    restart: on-failure
-#    tty: true
-#    mem_limit: 1024M
-#    mem_reservation: 512M
-#    ports:
-#      - 7070:7070
-#    volumes:
-#      - /etc/hosts:/etc/hosts
-#      - /var/run/docker.sock:/var/run/docker.sock
-#    networks:
-#      - Network_app
+  microservice1:
+    image: microservice1
+    container_name: microservice1
+    build:
+      context: ./microservice1
+      dockerfile: Dockerfile
+    restart: on-failure
+    tty: true
+    mem_limit: 1024M
+    mem_reservation: 512M
+    ports:
+    - 6060:6060
+    volumes:
+      - /etc/hosts:/etc/hosts
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - Network_app
+
+  microservice2:
+    container_name: microservice2
+    build:
+      context: ./microservice2
+      dockerfile: Dockerfile
+    image: microservice2
+    restart: on-failure
+    tty: true
+    mem_limit: 1024M
+    mem_reservation: 512M
+    ports:
+      - 7070:7070
+    volumes:
+      - /etc/hosts:/etc/hosts
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - Network_app
 
   grafana:
     ports:
-     - 3000:3000
+     - 3300:3000
     image: grafana/grafana
-    container_name: grafana
+    container_name: grafana1
     networks:
       - Network_app
 
@@ -49,6 +49,8 @@ services:
     image: influxdb
     ports:
       - 8086:8086
+    volumes:
+      - /tmp/influxdb:/var/lib/influxdb
     networks:
       - Network_app
 

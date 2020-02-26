@@ -10,7 +10,8 @@
 	<packaging>pom</packaging>
 
 	<modules>
-
+		<module>microservice1</module>
+		<module>microservice2</module>
 	</modules>
 
 </project>
